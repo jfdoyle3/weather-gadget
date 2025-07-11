@@ -1,8 +1,4 @@
-# Starter Repository Template
+# Desktop Weather Gadget
 
-This Repository has a customized gitignore file
-ignores:
-VS CODE, Visual Studio, Eclipse IDE, Intellij IDEA, Python,
-Gradle, Maven.
-
-- added Visual Studio in gitignore 1/31/2023
+Pico2W with a LCD to display weather
+Web server to get more info.
