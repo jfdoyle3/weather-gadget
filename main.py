@@ -22,7 +22,6 @@ from machine import Pin
 from wifiConnect import *
 from apiCalls import *
 from ledCodes import *
-from secrets import *
 from lcd import *
 
 def powerOff():
@@ -32,7 +31,7 @@ def powerOff():
 
 
 def main():
-    ip=net_connect(ssid=secrets['ssid'],psk=secrets['password'])
+    ip=wifiConnect()
         
     # No WiFi connection - Exit
     if not isinstance(ip, str):
