@@ -1,4 +1,4 @@
-## Weather
+## Web Server
 ##----------------
 ## Uncomment here the LCD Display
 ## and resources/init.py
@@ -23,12 +23,6 @@ from ledCodes import *
 from secrets import *
 from lcd import *
 
-def powerOff():
-    ledOff()
-    lcdOff()
-    sys.exit()
-
-
 def main():
     ip=net_connect(ssid=secrets['ssid'],psk=secrets['password'])
         
@@ -36,18 +30,14 @@ def main():
     if not isinstance(ip, str):
         lcdNotConnected()
         errorCode(3,.5)   # 3 blinks no connection
-        powerOff()
+        lcdOff()
+        sys.exit()
         
     # Connected to net
     lcdConnected()
     print(ip)
     ledOn()
     
-    
-    # Request from url - output as text
-    res = requests.get(url='https://api.weather.gov/points/41.87092932,-71.42788283')
-    print(res.text)
-    powerOff()
     
     
 # Main
