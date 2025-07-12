@@ -1,4 +1,4 @@
-# Network Connection
+# WiFi Connection
 
 
 # System Imports
@@ -13,7 +13,7 @@ import time
 from secrets import *
 from lcd import *
 
-def net_connect(ssid=secrets['ssid'],psk=secrets['password']):
+def wifiConnect(ssid=secrets['ssid'],psk=secrets['password']):
     wlan = network.WLAN(network.STA_IF)
     wlan.active(True)
     wlan.connect(ssid, psk)

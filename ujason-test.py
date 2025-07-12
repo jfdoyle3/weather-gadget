@@ -1,2 +1,0 @@
-import ujason
-print(ujason)
