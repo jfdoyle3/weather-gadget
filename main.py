@@ -5,29 +5,26 @@
 ## To enable Display
 
 # System Imports
-import sys
 import os
+import sys
 
 # Add a directory to sys.path
-sys.path.append("/display")
+sys.path.append("/display/e-ink")
 sys.path.append("/network")
 sys.path.append("/resources")
 
 # Project Imports
-import network
-import time
-import urequests as requests
-import ujson
-from machine import Pin
 from wifiConnect import *
 from apiCalls import *
 from ledCodes import *
 from lcd import *
 
 def powerOff():
-    ledOff()
-    lcdOff()
-    sys.exit()
+    epd = EPD_2in13_V4_Landscape()
+    epd.init()
+    epd.Clear()
+    epd.delay_ms(2000)
+    epd.sleep()
 
 
 def main():

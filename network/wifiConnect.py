@@ -6,22 +6,23 @@ import sys
 import os
 
 # Add a directory to sys.path
-sys.path.append("/display")
+sys.path.append("/display/e-ink")
 
 import network
 import time
 from secrets import *
-from lcd import *
+from einkdriver import *
 
-def wifiConnect(ssid=secrets['ssid'],psk=secrets['password']):
+def wifiConnect():
+    epd = EPD_2in13_V4_Landscape()
     wlan = network.WLAN(network.STA_IF)
     wlan.active(True)
-    wlan.connect(ssid, psk)
+    wlan.connect(secrets['ssid'],secrets['password'])
 
     # Wait for connect or fail
     wait = 10
     waitDisplay=0
-    while wait > 0:
+    while 0 < wait:
         if wlan.status() < 0 or wlan.status() >= 3:
             break
         wait -= 1

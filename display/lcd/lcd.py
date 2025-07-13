@@ -1,4 +1,12 @@
 # Display
+#
+# LCD 1602 Display connection
+#  
+#  LCD:           PICO:
+#   GND             GND       PIN ANY
+#   VCC             VBUS      PIN 40
+#   SDA             I2C0 SDA  PIN 1
+#   SCL             I2C0 SCL  PIN 2
 
 # System Imports
 import sys
@@ -37,3 +45,12 @@ def lcdOff():
       lcd.clear()
       lcd.backlight_off()
       lcd.display_off()
+      
+      
+'''     
+def wifiWait(timeDelay);        
+      lcdText('Initalizing WiFi',0,0)
+      lcdText('.',waitDisplay,1)
+      time.sleep(timeDelay)
+      waitDisplay -= 1
+'''
