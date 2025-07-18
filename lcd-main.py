@@ -1,8 +1,8 @@
-#  Weather Gadget
-# ----------------
-#
-# 
-# 
+## Weather
+##----------------
+## Uncomment here the LCD Display
+## and resources/init.py
+## To enable Display
 
 # System Imports
 import os
@@ -18,7 +18,6 @@ from wifiConnect import *
 from apiCalls import *
 from ledCodes import *
 from lcd import *
-from button import *
 
 def powerOff():
     lcdOff()
@@ -52,9 +51,6 @@ def main():
         print(req["setup"])
         print(req["punchline"])
         
-        
-        buttonPress()
-        
     except Exception as e:
         print("Error:", e)
     
@@ -63,3 +59,4 @@ def main():
 # Main
 if __name__ == "__main__":
     main()
+

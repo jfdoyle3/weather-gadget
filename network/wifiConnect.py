@@ -6,15 +6,15 @@ import sys
 import os
 
 # Add a directory to sys.path
-sys.path.append("/display/e-ink")
+sys.path.append("/display/lcd")
+sys.path.append("/network")
 
 import network
 import time
 from secrets import *
-from einkdriver import *
+from lcd import *
 
 def wifiConnect():
-    epd = EPD_2in13_V4_Landscape()
     wlan = network.WLAN(network.STA_IF)
     wlan.active(True)
     wlan.connect(secrets['ssid'],secrets['password'])

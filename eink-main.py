@@ -1,15 +1,15 @@
-#  Weather Gadget
-# ----------------
-#
-# 
-# 
+## Weather
+##----------------
+## Uncomment here the LCD Display
+## and resources/init.py
+## To enable Display
 
 # System Imports
 import os
 import sys
 
 # Add a directory to sys.path
-sys.path.append("/display/lcd")
+sys.path.append("/display/e-ink")
 sys.path.append("/network")
 sys.path.append("/resources")
 
@@ -18,15 +18,16 @@ from wifiConnect import *
 from apiCalls import *
 from ledCodes import *
 from lcd import *
-from button import *
 
 def powerOff():
-    lcdOff()
-    sys.exit()
+    epd = EPD_2in13_V4_Landscape()
+    epd.init()
+    epd.Clear()
+    epd.delay_ms(2000)
+    epd.sleep()
 
 
 def main():
-    print("wifi init")
     ip=wifiConnect()
         
     # No WiFi connection - Exit
@@ -51,9 +52,6 @@ def main():
         print(req["type"])
         print(req["setup"])
         print(req["punchline"])
-        
-        
-        buttonPress()
         
     except Exception as e:
         print("Error:", e)
