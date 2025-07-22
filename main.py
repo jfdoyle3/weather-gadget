@@ -1,11 +1,11 @@
-##   Weather
-## ----------------
-## Uncomment here the LCD Display
-## and resources/init.py
-## To enable Display
-##
-## https://api.open-meteo.com/v1/forecast?latitude=41.8501&longitude=-71.4662&current=temperature_2m,rain,apparent_temperature&timezone=America%2FNew_York&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch
+'''
+  Weather Gadget
+  ----------------
+  
+    Free API Call:
+     https://api.open-meteo.com/v1/forecast?latitude=41.8501&longitude=-71.4662&current=temperature_2m,rain,apparent_temperature&timezone=America%2FNew_York&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch
 
+'''
 # System Imports
 import os
 import sys
