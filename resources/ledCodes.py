@@ -1,4 +1,5 @@
-# Error codes
+# LED Error Codes
+# On Board LED
 # .5 time good default number
 
 from machine import Pin
