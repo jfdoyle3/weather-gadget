@@ -12,13 +12,14 @@ sys.path.append("/resources")
 
 from einkdriver import *
 
-
-
+# Initalize Display
 epd = EPD_2in13_V4_Landscape()
+# Clear Display
 epd.Clear()
-
-epd.fill(0x00)
-epd.text("Waveshare", 20, 100, 0xff)
+# Fill Screen 00 = Clear/White   FF = Black
+epd.fill(0xFF)
+epd.text("Boo!",20,20,0x00)
 epd.display(epd.buffer)
 epd.delay_ms(2000)
+
 

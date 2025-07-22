@@ -13,7 +13,7 @@ import sys
 import os
 
 # Add a directory to sys.path
-sys.path.append("/display/drivers")
+sys.path.append("/drivers")
 
 from pico_i2c_lcd import I2cLcd
 from machine import I2C
