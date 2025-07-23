@@ -1,17 +1,24 @@
-#  Weather Gadget
-# ----------------
-#
-# https://api.open-meteo.com/v1/forecast?latitude=41.8501&longitude=-71.4662&hourly=temperature_2m&current=temperature_2m&timezone=America%2FNew_York&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch
-# 
+'''
+    Weather Gadget
+   ----------------
+ Open Weather Current Temp - small respaonse set
+ https://api.open-meteo.com/v1/forecast?latitude=41.8501&longitude=-71.4662&current=temperature_2m&timezone=America%2FNew_York&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch 
+
+ Test - Random Joke
+ https://official-joke-api.appspot.com/random_joke
+''' 
 
 # System Imports
 import os
 import sys
+import json
 
 # Add a directory to sys.path
 sys.path.append("/display/lcd")
 sys.path.append("/network")
 sys.path.append("/resources")
+
+
 
 # Project Imports
 from wifiConnect import *
@@ -23,12 +30,17 @@ from button import *
 def powerOff():
     lcdOff()
     sys.exit()
+    
+
+def initApp():
+     print("wifi init")
+     lcdClear()
+     ip=wifiConnect()
 
 
 def main():
-    print("wifi init")
-    ip=wifiConnect()
-        
+    initApp()
+    '''        
     # No WiFi connection - Exit
     if not isinstance(ip, str):
         lcdNotConnected()
@@ -39,19 +51,29 @@ def main():
     lcdConnected()
     print(ip)
     ledOn()
+    '''    
     
     # res = requests.get(url='https://api.weather.gov/points/41.87092932,-71.42788283')
     # print(res.text)
-    apiURL='https://official-joke-api.appspot.com/random_joke'
+    apiURL='https://api.open-meteo.com/v1/forecast?latitude=41.8501&longitude=-71.4662&current=temperature_2m&timezone=America%2FNew_York&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch '
     # Make the HTTP GET request
     try:
-        req=freeAPIRequest(apiURL)
+        # req=freeAPIRequest(apiURL)
+        with open('/files/f.json') as f:
+            data = json.load(f)
         
         # Access parsed data
-        print(req["type"])
-        print(req["setup"])
-        print(req["punchline"])
+        print(data)
+        print('>>------------------------->')
+        print('<-------------------------<<')
         
+        temp="{:.0f}".format(data['current']['temperature_2m'])
+        unit=data['current_units']['temperature_2m']
+        
+        print(f"{temp}{unit}")
+        
+        #lcdText(f"{temp}{unit}",0,0)
+        lcdText("Hi",0,0)
         
         buttonPress()
         

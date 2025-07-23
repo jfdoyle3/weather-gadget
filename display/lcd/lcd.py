@@ -13,9 +13,11 @@ import sys
 import os
 
 # Add a directory to sys.path
-sys.path.append("/drivers")
+sys.path.append("/display/lcd/drivers")
+sys.path.append("/resources")
 
 from pico_i2c_lcd import I2cLcd
+from ledCodes import *
 from machine import I2C
 from machine import Pin
 import utime as time
@@ -44,6 +46,7 @@ def lcdConnected():
 def lcdOff():
       lcd.clear()
       lcd.backlight_off()
+      ledOff()
       lcd.display_off()
       
       
