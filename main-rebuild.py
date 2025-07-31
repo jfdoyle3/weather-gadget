@@ -27,7 +27,7 @@ from ledCodes import *
 from oledLib import *
 from bme280Lib import *
 import json
-
+import network
 
     
     
@@ -36,14 +36,16 @@ def main():
     
     ip=wifiConnect()
     
-    oledText(ip,10,36)
-
-
+    print(ip)
     
-
-
-    oledOff()
-
+    wlan = network.WLAN(network.STA_IF)
+    rssi=wlan.status('rssi')
+    print(f'RSSI: {rssi} dBm')
+    
+    clamped_rssi=max(min(rssi, -30),-90)
+    percent=int((clamped_rssi +90) *100 /60)
+    
+    print(f'Signal Strength: {percent}%')
 # Main
 if __name__ == "__main__":
     main()

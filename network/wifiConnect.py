@@ -17,13 +17,15 @@ from oledLib import *
 from ledCodes import *
 
 def wifiConnect():
-    oledText("Wifi Connect",0,0)
+   # oledText("Wifi Connect",0,0)
     wlan = network.WLAN(network.STA_IF)
     wlan.active(True)
     wlan.connect(secrets['ssid'],secrets['password'])
     
     # oledClear()
-    
+    rssi=wlan.status('rssi')
+    print(f'RSSI: {rssi} dBm')
+
 
     # Wait for connect or fail
     wait = 10
@@ -31,25 +33,25 @@ def wifiConnect():
     while 0 < wait:
         if wlan.status() < 0 or wlan.status() >= 3:
             break
-        wait -= 1
-        oledText('Initalizing WiFi',0,0)
-        oledText('.',waitDisplay,1)
-        time.sleep(1)
-        waitDisplay += 1
+    #    wait -= 1
+    #    oledText('Initalizing WiFi',0,0)
+    #    oledText('.',waitDisplay,1)
+    #    time.sleep(1)
+    #    waitDisplay += 1
 
     # Handle connection error
     if wlan.status() != 3:
         # raise RuntimeError('wifi connection failed')
-        oledNotConnected()
+     #   oledNotConnected()
         errorCode(3,.5)   # 3 blinks no connection
-        powerOff()
+     #   powerOff()
         # return RuntimeError('wifi connection failed')
     else:
         ip=wlan.ifconfig()[0]
-        print(ip)
-        oledConnected()
-        time.sleep(.5)
-        oledClear()
+       # print(ip)
+       # oledConnected()
+       # time.sleep(.5)
+       # oledClear()
         return ip
     
     
