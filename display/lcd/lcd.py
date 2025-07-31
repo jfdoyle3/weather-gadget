@@ -18,12 +18,11 @@ sys.path.append("/resources")
 
 from pico_i2c_lcd import I2cLcd
 from ledCodes import *
-from machine import I2C
-from machine import Pin
+from machine import I2C, Pin
 import utime as time
  
  
-i2c = I2C(id=0,scl=Pin(1),sda=Pin(0),freq=100000)
+i2c = I2C(id=0,scl=Pin(16),sda=Pin(17),freq=100000)
 lcd = I2cLcd(i2c, 0x27, 2, 16)
 
 def lcdClear():
