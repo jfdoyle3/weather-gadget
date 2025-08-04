@@ -1,12 +1,17 @@
-'''
-    Weather Gadget
-   ----------------
- Open Weather Current Temp - small respaonse set
- https://api.open-meteo.com/v1/forecast?latitude=41.8501&longitude=-71.4662&current=temperature_2m&timezone=America%2FNew_York&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch 
-
- Test - Random Joke
- https://official-joke-api.appspot.com/random_joke
-''' 
+#
+#    Weather Gadget
+#   ----------------
+# Open Weather Current Temp - small respaonse set
+# https://api.open-meteo.com/v1/forecast?latitude=41.8501&longitude=-71.4662&current=temperature_2m&timezone=America%2FNew_York&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch 
+#
+# Test - Random Joke
+# https://official-joke-api.appspot.com/random_joke
+# 
+# API Time
+# curl "http://worldtimeapi.org/api/timezone/America/New_York"
+# 
+# Display:  I2C:0 SDA:16 SCL:17
+# BME280    I2C:1 SDA:18 SCL:19
 
 # System Imports
 import os
@@ -14,10 +19,9 @@ import sys
 
 
 # Add a directory to sys.path
-sys.path.append("/display/oled")
+# sys.path.append("/display")
 sys.path.append("/network")
 sys.path.append("/resources")
-sys.path.append("/bme280")
 
 
 # Project Imports
@@ -26,26 +30,21 @@ from apiCalls import *
 from ledCodes import *
 from oledLib import *
 from bme280Lib import *
-import json
-import network
+from gui import *
 
     
     
 def main():
     # initApp()
-    
-    ip=wifiConnect()
-    
-    print(ip)
-    
-    wlan = network.WLAN(network.STA_IF)
-    rssi=wlan.status('rssi')
-    print(f'RSSI: {rssi} dBm')
-    
-    clamped_rssi=max(min(rssi, -30),-90)
-    percent=int((clamped_rssi +90) *100 /60)
-    
-    print(f'Signal Strength: {percent}%')
+    print('Start')
+    ip, percent=wifiConnect()
+    print(ip,f'{percent}%')
+    indoorTemp=getTempF()
+    guiHeader(percent)
+    guiGraphics()
+    guiInfo(indoorTemp)
+    displayGUI()
+    print("23" + chr(176))
 # Main
 if __name__ == "__main__":
     main()

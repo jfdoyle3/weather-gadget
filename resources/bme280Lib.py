@@ -2,20 +2,12 @@
 #
 # bme.values returns: Temperature C, Pressure, humidity
 
-import os
-import sys
-
-# Add a directory to sys.path
-sys.path.append("/display/oled")
-sys.path.append("/network")
-sys.path.append("/bme280")
-
 from machine import I2C, Pin
-import bme280_float as bme280
+from bme280_float import *
+from utime import sleep
 
-
-i2cBME = I2C(1, sda=Pin(18), scl=Pin(19), freq=40000)
-bme = bme280.BME280(i2c=i2cBME)
+i2c = I2C(1, sda=Pin(18), scl=Pin(19))
+bme = BME280(i2c=i2c)
 
 # def getTemp():
 temp=bme.values[0]
@@ -40,7 +32,7 @@ def getTempF():
 
 
 
-'''
+
 temp=bme.values[0]
 
 
@@ -50,4 +42,3 @@ print(temp)
 print(bme.altitude)
 
 print(bme.sealevel)
-'''

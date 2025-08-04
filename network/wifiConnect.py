@@ -1,4 +1,6 @@
 # WiFi Connection
+#
+# Try catch here.
 
 
 # System Imports
@@ -23,8 +25,7 @@ def wifiConnect():
     wlan.connect(secrets['ssid'],secrets['password'])
     
     # oledClear()
-    rssi=wlan.status('rssi')
-    print(f'RSSI: {rssi} dBm')
+
 
 
     # Wait for connect or fail
@@ -52,7 +53,10 @@ def wifiConnect():
        # oledConnected()
        # time.sleep(.5)
        # oledClear()
-        return ip
+        rssi=wlan.status('rssi')
+        clamped_rssi=max(min(rssi, -30),-90)
+        percent=int((clamped_rssi +90) *100 /60)
+        return ip,percent
     
     
     

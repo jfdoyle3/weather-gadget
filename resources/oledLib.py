@@ -3,10 +3,8 @@
 # System Imports
 import os
 import sys
-import json
 
 # Add a directory to sys.path
-sys.path.append("/display/oled/driver")
 sys.path.append("/network")
 sys.path.append("/resources")
 
@@ -15,7 +13,7 @@ import ssd1306
 import utime
 
 # using default address 0x3C
-i2c = I2C(sda=Pin(16), scl=Pin(17))
+i2c = I2C(0,sda=Pin(16), scl=Pin(17))
 oled = ssd1306.SSD1306_I2C(128, 64, i2c)
 
 
@@ -40,4 +38,3 @@ def oledNotConnected():
       oledClear()
       oledText('WiFi',0,0)
       oledText('Not Connected',0,1)
-
