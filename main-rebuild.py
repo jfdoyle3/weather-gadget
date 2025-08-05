@@ -41,7 +41,8 @@ def main():
     
     print('Start')
     ip, percent=wifiConnect()
-
+    data=getWeather()
+    print(data)
     indoorTemp=getTempF()
     guiHeader(percent)
     guiGraphics()
