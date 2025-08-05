@@ -32,13 +32,14 @@ def guiGraphics():
         oled.hline(0,9,128,1)
         # oled.vline(60,9,64,1)
         oled.hline(0,50,128,1)
-        oled.show()
+        
 
-def guiInfo(indoor,unit):
+def guiInfo(x,y,temp,unit):
         # Info
         oled.text('indoor',0,17,1)
         # oled.text('indoor   api',0,17,1)
-        oled.text(f'{indoor} {unit}',0,33,1)
+        # oled.text(f'{indoor}',0,33,1)
+        degreeSymb(x,y,temp,unit)
         
 
         
@@ -47,23 +48,49 @@ def guiFooter(ip):
         oled.text(f"{ip}",0,56,1)
 
 # Display
-def displayGUI():
-        oled.show()
+def showGUI():
+    oled.show()
         
 def displayOff():
-    oled.powerOff()
+    oled.poweroff()
 
 def displayDelayOff(time):
     utime.sleep(time)
     oled.powerOff()
 
-def degreeSymb(x,y,text):
-    oled.hline(x+10,y+0,3,1)
-    oled.vline(x+9,y+1,3,1)
-    oled.vline(x+13,y+1,3,1)
-    oled.hline(x+10,y+4,3,1)
-    oled.text(f'{text}',x+15,y+0,1)
+def degreeSymb(x,y,temp,unit):
+    tempX,tempY=x+0, y+0
+    
+    # Spacing between temp and symbol
+    # negative is a 'Digit' when counting digits
+    #
+    # One Digit
+    # symX, symY=x-1, y+0
+    # two Digits
+    # symX, symY=x+8, y+0
+    # three Digits
+    # symX, symY=x+16, y+0
+    # Four Digits
+    # symX, symY=x+23, y+0
+    
+    if temp>=-99 and temp<=999:
+        symX, symY=x+16, y+0
 
+    if temp>=-9 and temp<=99:
+        symX, symY=x+8, y+0
+
+    if temp>=0 and temp<=9:
+        symX, symY=x-1, y+0
+   
+    # small Degree Symbol
+    oled.text(f'{temp}',tempX,tempY,1)
+    oled.hline(symX+10,symY+0,2,1)
+    oled.vline(symX+9,symY+1,2,1)
+    oled.vline(symX+12,symY+1,2,1)
+    oled.hline(symX+10,symY+3,2,1)
+    oled.text(f'{unit}',symX+15,symY+0,1)
+
+    
 # Mock Display
 def guiMock():
         oled.hline(0,0,7,1)

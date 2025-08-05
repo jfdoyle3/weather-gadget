@@ -42,13 +42,14 @@ def main():
     print('Start')
     ip, percent=wifiConnect()
 
-    # indoorTemp=getTempF()
+    indoorTemp=getTempF()
     guiHeader(percent)
     guiGraphics()
-    # guiInfo(indoorTemp)
-    displayGUI()
-
+    guiInfo(10,30,indoorTemp,'F')
+    showGUI()
     
+    utime.sleep(20)
+    displayOff()
     
 # Main
 if __name__ == "__main__":

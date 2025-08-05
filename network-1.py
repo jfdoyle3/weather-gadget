@@ -1,5 +1,6 @@
 import network
 import time
+import socket
 
 # Initialize Wi-Fi interface in station mode
 wlan = network.WLAN(network.STA_IF)
