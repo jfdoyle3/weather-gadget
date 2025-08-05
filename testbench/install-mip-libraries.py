@@ -1,11 +1,13 @@
-import os
-import sys
+# WiFi Connection
 
+
+# System Imports
+import sys
+import os
 
 # Add a directory to sys.path
-sys.path.append("/network")
 
-# Install Libraries
+
 import network
 import utime as time
 from secrets import *
@@ -20,6 +22,8 @@ wait = 10
 
 while 0 < wait:
     if wlan.status() < 0 or wlan.status() >= 3:
+        print('wifi failed')
+        sys.exit()
         break
 
 # Handle connection error
@@ -31,16 +35,15 @@ else:
     print('wifi connected')
     print(ip)
     
-   
+'''    
 import mip
 print('Installing libraries')
+# Libaries
 
-# Libaries Calls
+mip.install("ssd1306")
 
-# mip.install("ssd1306")
-
-
+'''
 
 
-print('libraries installed\nRefresh to show on device')
+print('libraries installed')
 print('end of line')

@@ -35,16 +35,21 @@ from gui import *
     
     
 def main():
+    # was a function on some itteration - keeping to
+    # remeber to make one
     # initApp()
+    
     print('Start')
     ip, percent=wifiConnect()
-    print(ip,f'{percent}%')
-    indoorTemp=getTempF()
+
+    # indoorTemp=getTempF()
     guiHeader(percent)
     guiGraphics()
-    guiInfo(indoorTemp)
+    # guiInfo(indoorTemp)
     displayGUI()
-    print("23" + chr(176))
+
+    
+    
 # Main
 if __name__ == "__main__":
     main()

@@ -2,6 +2,7 @@
 # resolution: 128x64
 # characters: 16x5 standard text
 #
+# https://docs.micropython.org/en/latest/esp8266/tutorial/ssd1306.html
 
 from machine import Pin, I2C
 import ssd1306
@@ -9,62 +10,73 @@ import utime
 import framebuf
 
 # using default address 0x3C
-i2c = I2C(0, sda=Pin(16), scl=Pin(17))
+i2c = I2C(0,sda=Pin(16), scl=Pin(17))
 oled = ssd1306.SSD1306_I2C(128, 64, i2c)
-
 
 # Header
 def guiHeader(rssi):
-    # WiFi Antenna
-    oled.hline(0, 0, 9, 1)
-    oled.vline(4, 0, 8, 1)
-    oled.line(8, 0, 4, 4, 1)
-    oled.line(0, 0, 4, 4, 1)
+        # WiFi Antenna
+        oled.hline(0,0,9,1)
+        oled.vline(4,0,8,1)
+        oled.line(8,0,4,4,1)
+        oled.line(0,0,4,4,1)
 
-    # WIFI Strength
-    oled.text(f"{rssi}%", 15, 0, 1)
-    # Time
-    oled.text("2:09pm", 80, 0, 1)
-    # Header End
-
+        # WIFI Strength
+        oled.text(f'{rssi}%',15,0,1)
+        # Time
+        oled.text('2:09pm',80,0,1)
+        # Header End
 
 def guiGraphics():
-    # Graphic
-    oled.hline(0, 9, 128, 1)
-    # oled.vline(60,9,64,1)
-    oled.hline(0, 50, 128, 1)
-    oled.show()
+        # Graphic
+        oled.hline(0,9,128,1)
+        # oled.vline(60,9,64,1)
+        oled.hline(0,50,128,1)
+        oled.show()
 
+def guiInfo(indoor,unit):
+        # Info
+        oled.text('indoor',0,17,1)
+        # oled.text('indoor   api',0,17,1)
+        oled.text(f'{indoor} {unit}',0,33,1)
+        
 
-def guiInfo(indoor):
-    # Info
-    oled.text("indoor", 0, 17, 1)
-    # oled.text('indoor   api',0,17,1)
-    oled.text(f"{indoor}", 0, 33, 1)
-
-
+        
 def guiFooter(ip):
-    # Footer
-    oled.text(f"{ip}", 0, 56, 1)
-
+        # Footer
+        oled.text(f"{ip}",0,56,1)
 
 # Display
 def displayGUI():
-    oled.show()
+        oled.show()
+        
+def displayOff():
+    oled.powerOff()
 
+def displayDelayOff(time):
+    utime.sleep(time)
+    oled.powerOff()
 
-# Display
+def degreeSymb(x,y,text):
+    oled.hline(x+10,y+0,3,1)
+    oled.vline(x+9,y+1,3,1)
+    oled.vline(x+13,y+1,3,1)
+    oled.hline(x+10,y+4,3,1)
+    oled.text(f'{text}',x+15,y+0,1)
+
+# Mock Display
 def guiMock():
-    oled.hline(0, 0, 7, 1)
-    oled.vline(3, 0, 8, 1)
-    oled.line(0, 0, 3, 3, 1)
-    oled.line(7, 0, 3, 3, 1)
-    oled.text(f"{rssi}%", 15, 0, 1)
-    oled.text("2:09pm", 80, 0, 1)
-    oled.hline(0, 9, 128, 1)
-    oled.vline(60, 9, 42, 1)
-    oled.text("indoor    outdoor", 0, 17, 1)
-    oled.text("100F     100F", 0, 33, 1)
-    oled.hline(0, 50, 128, 1)
-    oled.text(str(ip), 0, 56, 1)
-    oled.show()
+        oled.hline(0,0,7,1)
+        oled.vline(3,0,8,1)
+        oled.line(0,0,3,3,1)
+        oled.line(7,0,3,3,1)
+        oled.text(f'{rssi}%',15,0,1)
+        oled.text('2:09pm',80,0,1)
+        oled.hline(0,9,128,1)
+        oled.vline(60,9,42,1)
+        oled.text('indoor    outdoor',0,17,1)
+        oled.text('100F     100F',0,33,1)
+        oled.hline(0,50,128,1)
+        oled.text(str(ip),0,56,1)
+        oled.show()
+

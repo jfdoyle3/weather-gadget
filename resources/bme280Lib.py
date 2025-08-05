@@ -10,17 +10,17 @@ i2c = I2C(1, sda=Pin(18), scl=Pin(19))
 bme = BME280(i2c=i2c)
 
 # def getTemp():
-temp=bme.values[0]
-press=bme.values[1]
-humid=bme.values[2]
+temp=bme.valuesRaw[0]
+press=bme.valuesRaw[1]
+humid=bme.valuesRaw[2]
 altitude=bme.altitude
 seaLevel=bme.sealevel
 dewPoint=bme.dew_point
 
-
+'''
 def getTempC():
-    temp=temp
-    return tempC
+    temp=bme.values[0]
+    return temp
 
 def getTempF():
     tempLen=len(temp)
@@ -29,15 +29,17 @@ def getTempF():
     fahrenheit=(celTempFloat*1.8)+32
     tempF="{:.2f}F".format(fahrenheit)
     return tempF
-
-
+'''
 
 
 temp=bme.values[0]
+tempRaw=bme.valuesRaw[0]
 
 
 
 print(temp)
+
+print(f'Raw: {tempRaw}')
 
 print(bme.altitude)
 
