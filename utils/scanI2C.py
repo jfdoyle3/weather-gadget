@@ -1,7 +1,7 @@
 from machine import I2C, Pin
 import utime
 
-i2c = I2C(1, sda=Pin(18), scl=Pin(19), freq=400000)
+i2c = I2C(1, sda=Pin(14), scl=Pin(15), freq=400000)
 print('Scanning I2C bus...')
 devices = i2c.scan()
 

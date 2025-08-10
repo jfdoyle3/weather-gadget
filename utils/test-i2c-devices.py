@@ -1,4 +1,6 @@
-
+# DC3231  - Real Time Clock:               I2C:1 SDA:14 SCL:15 
+# SSD1306 - OLED 128x64 Display:           I2C:0 SDA:16 SCL:17
+# BME280  - Temp &Humid &Barometer Sensor: I2C:1 SDA:18 SCL:19
 
 # System Imports
 import os
